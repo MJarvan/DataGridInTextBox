@@ -5,8 +5,36 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DataGridInTextBox"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="MainWindow" Height="600" Width="800">
     <Grid>
-        
+		<Grid.RowDefinitions>
+			<RowDefinition Height="*"></RowDefinition>
+			<RowDefinition Height="10*"></RowDefinition>
+		</Grid.RowDefinitions>
+		<TextBox Margin="10" Grid.Row="0" Name="textbox" Width="250" PreviewMouseLeftButtonDown="textbox_PreviewMouseLeftButtonDown" TextChanged="textbox_TextChanged"></TextBox>
+		<DataGrid Grid.Row="1" Name="datagrid"></DataGrid>
+		<Popup Name="popup" PlacementTarget="{Binding ElementName=textbox}" Width="400" Height="200" IsOpen="False" StaysOpen="False">
+			<DataGrid Name="dg" MouseLeave="MouseLeaveOrEnter" IsReadOnly="True" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" MouseDoubleClick="dg_MouseDoubleClick">
+				<!--local:DataGridTextSearch.SearchValue="{Binding ElementName=textbox, Path=Text, UpdateSourceTrigger=PropertyChanged}"-->
+				<!--<DataGrid.Resources>
+					<local:SearchValueConverter x:Key="SearchValueConverter" />
+					<Style TargetType="{x:Type DataGridCell}">
+						<Setter Property="local:DataGridTextSearch.IsTextMatch">
+							<Setter.Value>
+								<MultiBinding Converter="{StaticResource SearchValueConverter}">
+									<Binding RelativeSource="{RelativeSource Self}" Path="Content.Text" />
+									<Binding RelativeSource="{RelativeSource Self}" Path="(local:DataGridTextSearch.SearchValue)" />
+								</MultiBinding>
+							</Setter.Value>
+						</Setter>
+						<Style.Triggers>
+							<Trigger Property="local:DataGridTextSearch.IsTextMatch" Value="True">
+								<Setter Property="Background" Value="Orange" />
+							</Trigger>
+						</Style.Triggers>
+					</Style>
+				</DataGrid.Resources>-->
+			</DataGrid>
+		</Popup>
     </Grid>
 </Window>
